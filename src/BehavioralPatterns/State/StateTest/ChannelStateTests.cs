@@ -7,11 +7,9 @@ namespace StateTest
 {
     public class ChannelStateTests : BaseTest
     {
-        private readonly Dictionary<string, ChannelStateContext> _stateContexts = new();
-
         private const string ChannelKey = "channel-1";
 
-        private ChannelStateContext GetContext() => _stateContexts.GetValueOrDefault(ChannelKey)!;
+        private readonly Dictionary<string, ChannelStateContext> _stateContexts = new();
 
         public ChannelStateTests()
         {
@@ -20,6 +18,8 @@ namespace StateTest
             //save context
             _stateContexts.Add("channel-1", stateContext);
         }
+
+        private ChannelStateContext GetContext() => _stateContexts.GetValueOrDefault(ChannelKey)!;
 
         [Fact]
         public void ReceiveNumber_OnlyOneSuccess()

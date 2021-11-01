@@ -23,4 +23,8 @@
     <ProjectReference Include="..\..\..\TestBase\TestBase.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MarioState\" />
+  </ItemGroup>
+
 </Project>
