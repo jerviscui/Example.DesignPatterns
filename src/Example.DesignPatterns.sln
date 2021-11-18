@@ -17,6 +17,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		Directory.Build.props = Directory.Build.props
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreationalPatterns", "CreationalPatterns", "{F62320CC-131E-4097-B475-D6E41B2CE389}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Singleton", "Singleton", "{0977D69F-C9EE-454C-A3C4-91F541797EAF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonTest", "CreationalPatterns\Singleton\SingletonTest\SingletonTest.csproj", "{96057D84-BA46-480F-837D-BA22514D8B81}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +37,10 @@ Global
 		{20FDA361-3968-40C6-A8E9-552798BC0FF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20FDA361-3968-40C6-A8E9-552798BC0FF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20FDA361-3968-40C6-A8E9-552798BC0FF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96057D84-BA46-480F-837D-BA22514D8B81}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96057D84-BA46-480F-837D-BA22514D8B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96057D84-BA46-480F-837D-BA22514D8B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96057D84-BA46-480F-837D-BA22514D8B81}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,6 +48,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{BA54D22A-C09C-4AF0-A4FF-24299A20AA80} = {E2074465-556E-4D36-95ED-BC491C6096F3}
 		{A3CC7304-59DC-4115-9FB1-D9109C8BF1B1} = {BA54D22A-C09C-4AF0-A4FF-24299A20AA80}
+		{0977D69F-C9EE-454C-A3C4-91F541797EAF} = {F62320CC-131E-4097-B475-D6E41B2CE389}
+		{96057D84-BA46-480F-837D-BA22514D8B81} = {0977D69F-C9EE-454C-A3C4-91F541797EAF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF9986D3-E2E7-4070-8EC4-114F858E7A70}
