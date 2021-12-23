@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31424.327
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BehavioralPatterns", "BehavioralPatterns", "{E2074465-556E-4D36-95ED-BC491C6096F3}"
 EndProject
@@ -21,7 +21,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CreationalPatterns", "Creat
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Singleton", "Singleton", "{0977D69F-C9EE-454C-A3C4-91F541797EAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SingletonTest", "CreationalPatterns\Singleton\SingletonTest\SingletonTest.csproj", "{96057D84-BA46-480F-837D-BA22514D8B81}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SingletonTest", "CreationalPatterns\Singleton\SingletonTest\SingletonTest.csproj", "{96057D84-BA46-480F-837D-BA22514D8B81}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Factory", "Factory", "{CE613EBE-483F-4FB6-8061-F42D466072D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FactoryTest", "CreationalPatterns\Factory\FactoryTest\FactoryTest.csproj", "{45D48F29-D83A-4955-B6C7-A2CDDCA411E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{96057D84-BA46-480F-837D-BA22514D8B81}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{96057D84-BA46-480F-837D-BA22514D8B81}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{96057D84-BA46-480F-837D-BA22514D8B81}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45D48F29-D83A-4955-B6C7-A2CDDCA411E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45D48F29-D83A-4955-B6C7-A2CDDCA411E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45D48F29-D83A-4955-B6C7-A2CDDCA411E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45D48F29-D83A-4955-B6C7-A2CDDCA411E7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -50,6 +58,8 @@ Global
 		{A3CC7304-59DC-4115-9FB1-D9109C8BF1B1} = {BA54D22A-C09C-4AF0-A4FF-24299A20AA80}
 		{0977D69F-C9EE-454C-A3C4-91F541797EAF} = {F62320CC-131E-4097-B475-D6E41B2CE389}
 		{96057D84-BA46-480F-837D-BA22514D8B81} = {0977D69F-C9EE-454C-A3C4-91F541797EAF}
+		{CE613EBE-483F-4FB6-8061-F42D466072D5} = {F62320CC-131E-4097-B475-D6E41B2CE389}
+		{45D48F29-D83A-4955-B6C7-A2CDDCA411E7} = {CE613EBE-483F-4FB6-8061-F42D466072D5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BF9986D3-E2E7-4070-8EC4-114F858E7A70}
