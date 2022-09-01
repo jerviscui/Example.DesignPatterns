@@ -1,20 +1,19 @@
 using System.Threading;
 
-namespace SingletonTest
+namespace SingletonTest;
+
+public class InterlockedSingleton
 {
-    public class InterlockedSingleton
+    private InterlockedSingleton()
     {
-        private InterlockedSingleton()
-        {
-        }
+    }
 
-        private static InterlockedSingleton? _singleton;
+    private static InterlockedSingleton? _singleton;
 
-        public static InterlockedSingleton GetInstance()
-        {
-            Interlocked.CompareExchange(ref _singleton, new InterlockedSingleton(), null);
+    public static InterlockedSingleton GetInstance()
+    {
+        Interlocked.CompareExchange(ref _singleton, new InterlockedSingleton(), null);
 
-            return _singleton;
-        }
+        return _singleton;
     }
 }

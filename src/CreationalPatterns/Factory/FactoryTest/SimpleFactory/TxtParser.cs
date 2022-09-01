@@ -1,4 +1,4 @@
-namespace FactoryTest;
+namespace FactoryTest.SimpleFactory;
 
 public class TxtParser : IParser
 {

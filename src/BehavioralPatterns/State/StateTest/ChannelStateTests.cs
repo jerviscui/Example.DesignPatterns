@@ -1,173 +1,173 @@
 using System.Collections.Generic;
 using Shouldly;
+using StateTest.ChannelState;
 using TestBase;
 using Xunit;
 
-namespace StateTest
+namespace StateTest;
+
+public class ChannelStateTests : BaseTest
 {
-    public class ChannelStateTests : BaseTest
+    private const string ChannelKey = "channel-1";
+
+    private readonly Dictionary<string, ChannelStateContext> _stateContexts = new();
+
+    public ChannelStateTests()
     {
-        private const string ChannelKey = "channel-1";
+        var stateContext = new ChannelStateContext();
 
-        private readonly Dictionary<string, ChannelStateContext> _stateContexts = new();
+        //save context
+        _stateContexts.Add("channel-1", stateContext);
+    }
 
-        public ChannelStateTests()
-        {
-            var stateContext = new ChannelStateContext();
+    private ChannelStateContext GetContext() => _stateContexts.GetValueOrDefault(ChannelKey)!;
 
-            //save context
-            _stateContexts.Add("channel-1", stateContext);
-        }
+    [Fact]
+    public void ReceiveNumber_OnlyOneSuccess()
+    {
+        //new signal
 
-        private ChannelStateContext GetContext() => _stateContexts.GetValueOrDefault(ChannelKey)!;
+        var stateContext = GetContext();
+        var firstSignal = stateContext.ReceiveNumber();
+        var secondSignal = stateContext.ReceiveNumber();
 
-        [Fact]
-        public void ReceiveNumber_OnlyOneSuccess()
-        {
-            //new signal
+        firstSignal.ShouldBeTrue();
+        secondSignal.ShouldBeFalse();
+    }
 
-            var stateContext = GetContext();
-            var firstSignal = stateContext.ReceiveNumber();
-            var secondSignal = stateContext.ReceiveNumber();
+    [Fact]
+    public void RecognizeFailed_RecognizingState_ToWaitState_Test()
+    {
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new RecognizingState(stateContext));
 
-            firstSignal.ShouldBeTrue();
-            secondSignal.ShouldBeFalse();
-        }
+        stateContext.RecognizeFailed();
 
-        [Fact]
-        public void RecognizeFailed_RecognizingState_ToWaitState_Test()
-        {
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new RecognizingState(stateContext));
+        stateContext.IsRunning.ShouldBeFalse();
+    }
 
-            stateContext.RecognizeFailed();
+    [Fact]
+    public void WaitStateToPassed_Test()
+    {
+        var stateContext = GetContext();
 
-            stateContext.IsRunning.ShouldBeFalse();
-        }
+        stateContext.Passed();
 
-        [Fact]
-        public void WaitStateToPassed_Test()
-        {
-            var stateContext = GetContext();
+        //there is nothing
+    }
 
-            stateContext.Passed();
+    [Fact]
+    public void IsEnter_DirectionOnlyIn_Success()
+    {
+        //check enter or leave
+        //check direction
 
-            //there is nothing
-        }
+        var eventData = new RecognizeEventData { IsEnter = true, Direction = Direction.OnlyIn };
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new RecognizingState(stateContext));
 
-        [Fact]
-        public void IsEnter_DirectionOnlyIn_Success()
-        {
-            //check enter or leave
-            //check direction
+        var success = stateContext.IsEnter(eventData);
 
-            var eventData = new RecognizeEventData { IsEnter = true, Direction = Direction.OnlyIn };
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new RecognizingState(stateContext));
+        success.ShouldBeTrue();
+    }
 
-            var success = stateContext.IsEnter(eventData);
+    [Fact]
+    public void IsEnter_DirectionBothway_Success()
+    {
+        //check enter or leave
+        //check direction
 
-            success.ShouldBeTrue();
-        }
+        var eventData = new RecognizeEventData { IsEnter = true, Direction = Direction.Bothway };
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new RecognizingState(stateContext));
 
-        [Fact]
-        public void IsEnter_DirectionBothway_Success()
-        {
-            //check enter or leave
-            //check direction
+        var success = stateContext.IsEnter(eventData);
 
-            var eventData = new RecognizeEventData { IsEnter = true, Direction = Direction.Bothway };
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new RecognizingState(stateContext));
+        success.ShouldBeTrue();
+    }
 
-            var success = stateContext.IsEnter(eventData);
+    [Fact]
+    public void IsEnter_DirectionOnlyOut_Failed()
+    {
+        //check enter or leave
+        //check direction
 
-            success.ShouldBeTrue();
-        }
+        var eventData = new RecognizeEventData { IsEnter = true, Direction = Direction.OnlyOut };
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new RecognizingState(stateContext));
 
-        [Fact]
-        public void IsEnter_DirectionOnlyOut_Failed()
-        {
-            //check enter or leave
-            //check direction
+        var success = stateContext.IsEnter(eventData);
 
-            var eventData = new RecognizeEventData { IsEnter = true, Direction = Direction.OnlyOut };
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new RecognizingState(stateContext));
+        success.ShouldBeFalse();
+    }
 
-            var success = stateContext.IsEnter(eventData);
+    [Fact]
+    public void PayFailed_ReadyEnterState_ToWaitState_Test()
+    {
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new ReadyEnterState(stateContext));
 
-            success.ShouldBeFalse();
-        }
+        stateContext.PayFailed();
 
-        [Fact]
-        public void PayFailed_ReadyEnterState_ToWaitState_Test()
-        {
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new ReadyEnterState(stateContext));
+        stateContext.IsRunning.ShouldBeFalse();
+    }
 
-            stateContext.PayFailed();
+    [Fact]
+    public void BarredEntery_ReadyEnterState_ToWaitState_Test()
+    {
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new ReadyEnterState(stateContext));
 
-            stateContext.IsRunning.ShouldBeFalse();
-        }
+        stateContext.BarredEntery();
 
-        [Fact]
-        public void BarredEntery_ReadyEnterState_ToWaitState_Test()
-        {
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new ReadyEnterState(stateContext));
+        stateContext.IsRunning.ShouldBeFalse();
+    }
 
-            stateContext.BarredEntery();
+    [Fact]
+    public void IsLeave_DirectionOnlyOut_Success()
+    {
+        //check enter or leave
+        //check direction
 
-            stateContext.IsRunning.ShouldBeFalse();
-        }
+        var eventData = new RecognizeEventData { IsEnter = false, Direction = Direction.OnlyOut };
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new RecognizingState(stateContext));
 
-        [Fact]
-        public void IsLeave_DirectionOnlyOut_Success()
-        {
-            //check enter or leave
-            //check direction
+        var success = stateContext.IsLeave(eventData);
 
-            var eventData = new RecognizeEventData { IsEnter = false, Direction = Direction.OnlyOut };
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new RecognizingState(stateContext));
+        success.ShouldBeTrue();
+    }
 
-            var success = stateContext.IsLeave(eventData);
+    [Fact]
+    public void PayFailed_ReadyLeaveState_ToWaitState_Test()
+    {
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new ReadyLeaveState(stateContext));
 
-            success.ShouldBeTrue();
-        }
+        stateContext.PayFailed();
 
-        [Fact]
-        public void PayFailed_ReadyLeaveState_ToWaitState_Test()
-        {
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new ReadyLeaveState(stateContext));
+        stateContext.IsRunning.ShouldBeFalse();
+    }
 
-            stateContext.PayFailed();
+    [Fact]
+    public void Passed_EnteringState_ToWaitState_Test()
+    {
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new EnteringState(stateContext));
 
-            stateContext.IsRunning.ShouldBeFalse();
-        }
+        stateContext.Passed();
 
-        [Fact]
-        public void Passed_EnteringState_ToWaitState_Test()
-        {
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new EnteringState(stateContext));
+        stateContext.IsRunning.ShouldBeFalse();
+    }
 
-            stateContext.Passed();
+    [Fact]
+    public void Passed_LeavingState_ToWaitState_Test()
+    {
+        var stateContext = GetContext();
+        stateContext.SetCurrentState(new LeavingState(stateContext));
 
-            stateContext.IsRunning.ShouldBeFalse();
-        }
+        stateContext.Passed();
 
-        [Fact]
-        public void Passed_LeavingState_ToWaitState_Test()
-        {
-            var stateContext = GetContext();
-            stateContext.SetCurrentState(new LeavingState(stateContext));
-
-            stateContext.Passed();
-
-            stateContext.IsRunning.ShouldBeFalse();
-        }
+        stateContext.IsRunning.ShouldBeFalse();
     }
 }

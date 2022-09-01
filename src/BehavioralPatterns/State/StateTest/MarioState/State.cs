@@ -1,13 +1,12 @@
-namespace StateTest
+namespace StateTest.MarioState;
+
+public enum State
 {
-    public enum State
-    {
-        Cape = 0,
+    Cape = 0,
 
-        Fire = 1,
+    Fire = 1,
 
-        Small = 2,
+    Small = 2,
 
-        Super = 3
-    }
+    Super = 3
 }

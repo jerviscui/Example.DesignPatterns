@@ -1,23 +1,22 @@
-namespace StateTest
+namespace StateTest.MarioStateEx;
+
+public class CapeMarioState : MarioState
 {
-    public class CapeMarioState : MarioState
+    /// <inheritdoc />
+    public CapeMarioState(MarioStateContext marioStateContext) : base(marioStateContext)
     {
-        /// <inheritdoc />
-        public CapeMarioState(MarioStateContext marioStateContext) : base(marioStateContext)
-        {
-        }
+    }
 
-        /// <inheritdoc />
-        public override void TouchMonster()
-        {
-            MarioStateContext.SetState(new SmallMarioState(MarioStateContext));
-            MarioStateContext.SetScore(-200);
-        }
+    /// <inheritdoc />
+    public override void TouchMonster()
+    {
+        MarioStateContext.SetState(new SmallMarioState(MarioStateContext));
+        MarioStateContext.SetScore(-200);
+    }
 
-        /// <inheritdoc />
-        protected override void Entry()
-        {
-            MarioStateContext.SetScore(+200);
-        }
+    /// <inheritdoc />
+    protected override void Entry()
+    {
+        MarioStateContext.SetScore(+200);
     }
 }

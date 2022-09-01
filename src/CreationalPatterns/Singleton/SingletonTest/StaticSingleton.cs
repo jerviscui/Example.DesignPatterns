@@ -1,13 +1,12 @@
-namespace SingletonTest
+namespace SingletonTest;
+
+public class StaticSingleton
 {
-    public class StaticSingleton
+    private StaticSingleton()
     {
-        private StaticSingleton()
-        {
-        }
-
-        private static readonly StaticSingleton Singleton = new();
-
-        public static StaticSingleton GetInstance() => Singleton;
     }
+
+    private static readonly StaticSingleton Singleton = new();
+
+    public static StaticSingleton GetInstance() => Singleton;
 }

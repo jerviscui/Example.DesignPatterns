@@ -1,17 +1,16 @@
-namespace StateTest
-{
-    public class EnteringState : ChannelState
-    {
-        /// <inheritdoc />
-        public EnteringState(ChannelStateContext channelStateContext) : base(channelStateContext)
-        {
-        }
+namespace StateTest.ChannelState;
 
-        /// <inheritdoc />
-        public override void Passed()
-        {
-            ChannelStateContext.SetCurrentState(new WaitState(ChannelStateContext));
-            ChannelStateContext.IsRunning = false;
-        }
+public class EnteringState : ChannelState
+{
+    /// <inheritdoc />
+    public EnteringState(ChannelStateContext channelStateContext) : base(channelStateContext)
+    {
+    }
+
+    /// <inheritdoc />
+    public override void Passed()
+    {
+        ChannelStateContext.SetCurrentState(new WaitState(ChannelStateContext));
+        ChannelStateContext.IsRunning = false;
     }
 }

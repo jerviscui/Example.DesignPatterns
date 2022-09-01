@@ -1,18 +1,17 @@
-namespace StateTest
+namespace StateTest.ChannelState;
+
+public class RecognizeEventData
 {
-    public class RecognizeEventData
-    {
-        public bool IsEnter { get; set; }
+    public bool IsEnter { get; set; }
 
-        public Direction Direction { get; set; }
-    }
+    public Direction Direction { get; set; }
+}
 
-    public enum Direction
-    {
-        OnlyIn,
+public enum Direction
+{
+    OnlyIn,
 
-        OnlyOut,
+    OnlyOut,
 
-        Bothway
-    }
+    Bothway
 }

@@ -1,16 +1,15 @@
-namespace SingletonTest
+namespace SingletonTest;
+
+public class LazySingleton
 {
-    public class LazySingleton
+    private LazySingleton()
     {
-        private LazySingleton()
-        {
-        }
+    }
 
-        public static LazySingleton GetInstance() => Nested.Singleton;
+    public static LazySingleton GetInstance() => Nested.Singleton;
 
-        private static class Nested
-        {
-            internal static readonly LazySingleton Singleton = new();
-        }
+    private static class Nested
+    {
+        internal static readonly LazySingleton Singleton = new();
     }
 }

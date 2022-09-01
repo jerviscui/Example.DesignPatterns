@@ -1,12 +1,11 @@
 using System;
 
-namespace TestBase
+namespace TestBase;
+
+public static class Logger
 {
-    public static class Logger
+    public static void Log(string s)
     {
-        public static void Log(string s)
-        {
-            Console.WriteLine(s);
-        }
+        Console.WriteLine(s);
     }
 }

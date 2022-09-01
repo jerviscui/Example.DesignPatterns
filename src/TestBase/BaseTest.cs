@@ -1,23 +1,22 @@
 using System;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace TestBase
+namespace TestBase;
+
+public abstract class BaseTest
 {
-    public abstract class BaseTest
+    public IServiceProvider ServiceProvider { get; set; }
+
+    protected BaseTest()
     {
-        public IServiceProvider ServiceProvider { get; set; }
+        var services = new ServiceCollection();
 
-        protected BaseTest()
-        {
-            var services = new ServiceCollection();
+        Add(services);
 
-            Add(services);
+        ServiceProvider = services.BuildServiceProvider();
+    }
 
-            ServiceProvider = services.BuildServiceProvider();
-        }
-
-        protected virtual void Add(ServiceCollection services)
-        {
-        }
+    protected virtual void Add(ServiceCollection services)
+    {
     }
 }
