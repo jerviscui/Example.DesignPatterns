@@ -1,49 +1,48 @@
 using BuilderTest.DirectorAndBuilder;
 
-namespace BuilderTest
+namespace BuilderTest;
+
+public class DirectorAndBuilderTest
 {
-    public class DirectorAndBuilderTest
+    [Fact]
+    public void CarBuilder_Test()
     {
-        [Fact]
-        public void CarBuilder_Test()
-        {
-            var builder = new CarBuilder();
-            var director = new Director();
+        var builder = new CarBuilder();
+        var director = new Director();
 
-            director.MakeSportsCar(builder);
-            var car = builder.Build();
+        director.MakeSportsCar(builder);
+        var car = builder.Build();
 
-            car.Seats.ShouldBe(2);
-        }
+        car.Seats.ShouldBe(2);
+    }
 
-        [Fact]
-        public void CarManualBuilder_Test()
-        {
-            var builder = new CarManualBuilder();
-            var director = new Director();
+    [Fact]
+    public void CarManualBuilder_Test()
+    {
+        var builder = new CarManualBuilder();
+        var director = new Director();
 
-            director.MakeSportsCar(builder);
-            var car = builder.Build();
+        director.MakeSportsCar(builder);
+        var car = builder.Build();
 
-            car.Document.Contains("seats").ShouldBeTrue();
-        }
+        car.Document.Contains("seats").ShouldBeTrue();
+    }
 
-        [Fact]
-        public void Director_CreateCarAndManual_Test()
-        {
-            var builder = new CarBuilder();
-            var director = new Director();
+    [Fact]
+    public void Director_CreateCarAndManual_Test()
+    {
+        var builder = new CarBuilder();
+        var director = new Director();
 
-            director.MakeElectricCar(builder);
-            var car = builder.Build();
+        director.MakeElectricCar(builder);
+        var car = builder.Build();
 
-            var manulBuilder = new CarManualBuilder();
+        var manulBuilder = new CarManualBuilder();
 
-            director.MakeElectricCar(manulBuilder);
-            var manual = manulBuilder.Build();
+        director.MakeElectricCar(manulBuilder);
+        var manual = manulBuilder.Build();
 
-            car.Engine.ShouldBeFalse();
-            manual.Document.Contains("GPS").ShouldBeTrue();
-        }
+        car.Engine.ShouldBeFalse();
+        manual.Document.Contains("GPS").ShouldBeTrue();
     }
 }
