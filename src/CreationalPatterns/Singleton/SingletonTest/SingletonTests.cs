@@ -1,7 +1,4 @@
-using System.Threading.Tasks;
-using Shouldly;
 using TestBase;
-using Xunit;
 
 namespace SingletonTest;
 

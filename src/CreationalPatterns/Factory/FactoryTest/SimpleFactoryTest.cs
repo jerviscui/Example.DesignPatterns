@@ -1,6 +1,4 @@
 using FactoryTest.SimpleFactory;
-using Shouldly;
-using Xunit;
 
 namespace FactoryTest;
 

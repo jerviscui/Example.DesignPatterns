@@ -1,7 +1,5 @@
-using Shouldly;
 using StateTest.MarioState;
 using TestBase;
-using Xunit;
 
 namespace StateTest;
 

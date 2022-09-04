@@ -1,5 +1,3 @@
-using System.Threading;
-
 namespace SingletonTest;
 
 public class InterlockedSingleton

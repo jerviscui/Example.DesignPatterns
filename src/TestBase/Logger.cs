@@ -1,5 +1,3 @@
-using System;
-
 namespace TestBase;
 
 public static class Logger

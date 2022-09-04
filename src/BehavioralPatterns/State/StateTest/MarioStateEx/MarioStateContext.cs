@@ -1,5 +1,3 @@
-using System;
-
 namespace StateTest.MarioStateEx;
 
 public sealed class MarioStateContext : IMarioState
