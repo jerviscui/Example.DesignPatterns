@@ -10,7 +10,7 @@ public sealed class ChannelStateContext : IChannelState
         SetCurrentState(new WaitState(this));
     }
 
-    private IChannelState CurrentState { get; set; }
+    private IChannelState CurrentState { get; set; } = null!;
 
     public bool IsRunning { get; set; }
 

@@ -18,11 +18,11 @@ public sealed class MarioStateContext : IMarioState
 
     internal void SetState(IMarioState state)
     {
-        StateChanged.Invoke();
+        StateChanged?.Invoke();
         CurrentState = state;
     }
 
-    internal event Action StateChanged;
+    internal event Action? StateChanged;
 
     /// <inheritdoc />
     public void ObtainCape()

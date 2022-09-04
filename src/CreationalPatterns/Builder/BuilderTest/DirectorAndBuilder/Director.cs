@@ -1,5 +1,8 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace BuilderTest.DirectorAndBuilder;
 
+[SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
 public class Director
 {
     public void MakeSportsCar(IBuilder builder)
