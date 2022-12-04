@@ -1,6 +1,5 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <Folder Include="EventBus\" />
-    <Folder Include="Simple\" />
   </ItemGroup>
 </Project>
