@@ -4,9 +4,12 @@ namespace ObserverTest;
 
 public class LocalEventBus
 {
-    private readonly object _lockobj = new();
+    private readonly SubscriberManager _subscriberManager;
 
-    private readonly Dictionary<Type, List<IEventHandler>> _subscribers = new();
+    public LocalEventBus()
+    {
+        _subscriberManager = new SubscriberManager();
+    }
 
     public IDisposable Subscribe<TData>(IEventHandler<TData> eventHandler) where TData : EventData
     {
@@ -17,37 +20,18 @@ public class LocalEventBus
 
     private IDisposable Subscribe(Type eventDataType, IEventHandler eventHandler)
     {
-        GetHandlers(eventDataType).Add(eventHandler);
+        _subscriberManager.Add(eventDataType, eventHandler);
 
         return new UnsubscribeAction(this, eventHandler, eventDataType);
     }
 
-    private List<IEventHandler> GetHandlers(Type key)
-    {
-        if (!_subscribers.TryGetValue(key, out var value))
-        {
-            lock (_lockobj)
-            {
-                if (!_subscribers.TryGetValue(key, out value))
-                {
-                    value = new List<IEventHandler>();
-                    _subscribers.Add(key, value);
-                }
-            }
-        }
-
-        return value;
-    }
-
-    public void UnSubscribe(Type eventDataType, IEventHandler eventHandler)
-    {
-        GetHandlers(eventDataType).Remove(eventHandler);
-    }
+    public void UnSubscribe(Type eventDataType, IEventHandler eventHandler) =>
+        _subscriberManager.Remove(eventDataType, eventHandler);
 
     public async Task PublishAsync<TData>(TData eventData) where TData : EventData
     {
         var type = eventData.GetType();
-        var handlers = GetHandlers(type);
+        var handlers = _subscriberManager.GetHandlers(type);
 
         var errors = new List<Exception>();
 

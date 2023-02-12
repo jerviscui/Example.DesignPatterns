@@ -45,6 +45,24 @@ namespace ObserverTest
         }
 
         [Fact]
+        public async Task Publish_HandlerBindEvent_MultiSubs_Test()
+        {
+            var eventBus = new LocalEventBus();
+
+            var handler = new TestHandler();
+            eventBus.Subscribe(handler);
+
+            var handler2 = new TestHandler();
+            eventBus.Subscribe(handler2);
+
+            var eventData = new TestEventData();
+            await eventBus.PublishAsync(eventData);
+
+            handler.NotifyTimes.ShouldBe(1);
+            handler2.NotifyTimes.ShouldBe(1);
+        }
+
+        [Fact]
         public async Task Publish_HandlerBindEvent_NoTrigger_Test()
         {
             var eventBus = new LocalEventBus();
