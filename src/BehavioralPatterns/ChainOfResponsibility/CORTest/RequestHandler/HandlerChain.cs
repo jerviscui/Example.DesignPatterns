@@ -13,12 +13,13 @@ internal class HandlerChain
         }
 
         //version 1
-        Func<RequestHandler, RequestHandler> func = next =>
-        {
-            return context => handler.Handle(context, next);
-        };
+        //Func<RequestHandler, RequestHandler> func = next =>
+        //{
+        //    return context => handler.Handle(context, next);
+        //};
+        //本地函数更优，但是此处 1 & 2 没有区别
 
-        _handlers.Add(func);
+        _handlers.Add(Func);
     }
 
     public RequestHandler Build(RequestHandler requestAction)
