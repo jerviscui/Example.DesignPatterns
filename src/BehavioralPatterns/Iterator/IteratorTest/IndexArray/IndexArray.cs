@@ -109,7 +109,7 @@ public class IndexArray<T> : IEnumerable<T> where T : IEquatable<T>
     internal void Clear()
     {
         DateTime? time = null;
-        for (var i = 0; i < _enumerators.Count; i++)
+        for (var i = _enumerators.Count - 1; i >= 0; i--)
         {
             if (!_enumerators[i].weak.TryGetTarget(out _))
             {
@@ -124,9 +124,9 @@ public class IndexArray<T> : IEnumerable<T> where T : IEquatable<T>
             }
         }
 
-        _event.Set();
+        _event.Reset();
 
-        for (var i = 0; i < _list.Count; i++)
+        for (var i = _list.Count - 1; i >= 0; i--)
         {
             if (_list[i].DeleteTime.HasValue && (time is null || _list[i].DeleteTime < time))
             {
@@ -141,7 +141,7 @@ public class IndexArray<T> : IEnumerable<T> where T : IEquatable<T>
             }
         }
 
-        _event.Reset();
+        _event.Set();
     }
 
     internal int Length => _list.Count;

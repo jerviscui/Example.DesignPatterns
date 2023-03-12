@@ -158,7 +158,7 @@ namespace IteratorTest
             array.Add(2, 100);
             array.Add(3, 1000);
 
-            using var iterator1 = array.GetEnumerator();
+            var iterator1 = array.GetEnumerator();
 
             array.Remove(10);
 
@@ -173,6 +173,8 @@ namespace IteratorTest
 
             array.Clear(); //will delete none
             array.Length.ShouldBe(4);
+
+            iterator1.Dispose();
         }
 #endif
     }
