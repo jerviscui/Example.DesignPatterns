@@ -1,0 +1,8 @@
+namespace IteratorTest;
+
+public class Profile
+{
+    public int Id { get; set; }
+
+    public string Type { get; set; }
+}
